@@ -6,5 +6,5 @@ import java.util.List;
 public interface BookService {
     public Book save(Book book);
 
-    public List<Book> findAll();
+    public List<Book> findAllBook();
 }
