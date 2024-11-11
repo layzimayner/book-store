@@ -39,7 +39,7 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public List<Book> findAllBook() {
+    public List<Book> findAll() {
         try (Session session = sessionFactory.openSession()) {
             Query<Book> query = session.createQuery("FROM book", Book.class);
             return query.list();
