@@ -27,7 +27,7 @@ public class Book {
     private String author;
     @Column(unique = true, nullable = false)
     private String isbn;
-    @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
+    @Column(nullable = false)
     private BigDecimal price;
     private String description;
     private String coverImage;
