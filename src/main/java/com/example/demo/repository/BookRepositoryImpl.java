@@ -3,6 +3,8 @@ package com.example.demo.repository;
 import com.example.demo.exception.DataProcessingException;
 import com.example.demo.model.Book;
 import java.util.List;
+import java.util.Optional;
+
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -44,6 +46,14 @@ public class BookRepositoryImpl implements BookRepository {
             return query.getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Can't get books from DB", e);
+        }
+    }
+
+    @Override
+    public Optional<Book> findById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            Book book = session.find(Book.class, id);
+            return Optional.ofNullable(book);
         }
     }
 }
