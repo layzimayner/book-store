@@ -6,11 +6,9 @@ import com.example.demo.exception.EntityNotFoundException;
 import com.example.demo.mapper.BookMapper;
 import com.example.demo.model.Book;
 import com.example.demo.repository.BookRepository;
-
-import java.awt.print.Pageable;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,6 +26,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookDto> findAll(Pageable pageable) {
         return bookRepository.findAll(pageable).stream()
+                .map(bookMapper::toDto)
                 .toList();
     }
 
