@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.BookDto;
-import com.example.demo.dto.CreateBookRequestDto;
+import com.example.demo.dto.book.BookDto;
+import com.example.demo.dto.book.CreateBookRequestDto;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
 

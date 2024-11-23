@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.dto.book;
 
 import com.example.demo.annotation.unique.Unique;
 import jakarta.validation.constraints.NotBlank;
@@ -7,7 +7,9 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class CreateBookRequestDto {
+public class BookDto {
+    @Positive
+    private Long id;
     @NotBlank
     private String title;
     @NotBlank
@@ -15,7 +17,6 @@ public class CreateBookRequestDto {
     @NotBlank
     @Unique
     private String isbn;
-    @NotBlank
     @Positive
     private BigDecimal price;
     private String description;
