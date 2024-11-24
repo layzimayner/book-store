@@ -1,6 +1,6 @@
 package com.example.demo.dto.user;
 
-import com.example.demo.annotation.field_match.FieldMatch;
+import com.example.demo.annotation.matcher.FieldMatch;
 import com.example.demo.annotation.unique.Unique;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -18,4 +18,9 @@ public class UserRegistrationRequestDto {
     private String password;
     @NotBlank
     private String repeatPassword;
+    @NotBlank
+    private String firstName;
+    @NotBlank
+    private String lastName;
+    private String shippingAddress;
 }

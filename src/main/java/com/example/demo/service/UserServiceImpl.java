@@ -11,17 +11,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
     @Override
-    public UserResponseDto save(UserRegistrationRequestDto requestDto) throws RegistrationException {
+    public UserResponseDto save(UserRegistrationRequestDto requestDto)
+            throws RegistrationException {
         if (userRepository.existsByEmail(requestDto.getEmail())) {
             throw new RegistrationException("Email is already in use");
         }
         User user = userMapper.toModel(requestDto);
-        User savedUser = userRepository.save(user);
-        return userMapper.toUserResponseDto(savedUser);
+        return userMapper.toUserResponseDto(userRepository.save(user));
     }
 }

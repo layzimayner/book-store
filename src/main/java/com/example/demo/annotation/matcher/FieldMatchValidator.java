@@ -1,8 +1,7 @@
-package com.example.demo.annotation.field_match;
+package com.example.demo.annotation.matcher;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-
 import java.lang.reflect.Field;
 
 public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Object> {
@@ -34,8 +33,7 @@ public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Obje
             Object firstValue = firstField.get(value);
             Object secondValue = secondField.get(value);
 
-            boolean fieldsMatch = (firstValue == null && secondValue == null)
-                    || (firstValue != null && firstValue.equals(secondValue));
+            boolean fieldsMatch = firstValue.equals(secondValue);
 
             if (!fieldsMatch) {
                 context.disableDefaultConstraintViolation();
