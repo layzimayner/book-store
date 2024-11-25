@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.BookDto;
 import com.example.demo.dto.CreateBookRequestDto;
-import com.example.demo.service.BookService
+import com.example.demo.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
