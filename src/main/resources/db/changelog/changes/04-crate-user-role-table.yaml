@@ -1,7 +1,13 @@
 databaseChangeLog:
   - changeSet:
       id: create-user-roles-table
-      author: your_name
+      author: coder
+      preConditions:
+        onFail: MARK_RAN
+        conditions:
+          - not:
+              tableExists:
+                tableName: user_roles
       changes:
         - createTable:
             tableName: user_roles
@@ -21,13 +27,13 @@ databaseChangeLog:
             baseColumnNames: user_id
             referencedTableName: users
             referencedColumnNames: id
-            onDelete: CASCADE
+            constraintName: fk_user_roles_user_id
         - addForeignKeyConstraint:
             baseTableName: user_roles
             baseColumnNames: role_id
             referencedTableName: roles
             referencedColumnNames: id
-            onDelete: CASCADE
+            constraintName: fk_user_roles_role_id
         - addPrimaryKey:
             tableName: user_roles
             columnNames: user_id, role_id

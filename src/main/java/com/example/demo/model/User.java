@@ -33,7 +33,6 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String lastName;
     private String shippingAddress;
-    @Column(nullable = false)
     @ManyToMany
     @JoinTable(
             name = "user_roles",
@@ -44,9 +43,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(role -> (GrantedAuthority) role)
-                .toList();
+        return roles;
     }
 
     @Override
