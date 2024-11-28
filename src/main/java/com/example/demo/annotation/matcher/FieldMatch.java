@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FieldMatch {
 
-    String message() default "Fields do not match";
+    String message() default "Fields don't match";
 
     Class<?>[] groups() default {};
 
