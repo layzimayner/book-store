@@ -19,9 +19,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    private static final String ENCODING_SCHEME = "Bearer";
     private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
-    private static final String ENCODING_SCHEME = "Bearer";
 
     @Override
     protected void doFilterInternal(
