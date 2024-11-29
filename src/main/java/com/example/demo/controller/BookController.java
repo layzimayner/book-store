@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.book.BookDto;
+import com.example.demo.dto.book.BookDtoWithoutCategoryIds;
 import com.example.demo.dto.book.CreateBookRequestDto;
 import com.example.demo.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,7 +33,7 @@ public class BookController {
 
     @GetMapping
     @Operation(summary = "Get all books", description = "Get a list of all available books")
-    public List<BookDto> getAllBooks(Pageable pageable) {
+    public List<BookDtoWithoutCategoryIds> getAllBooks(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
@@ -48,7 +49,7 @@ public class BookController {
     @PutMapping("/{id}")
     @Operation(summary = "Update book", description = "Update book by id")
     public BookDto updateBook(@PathVariable @Valid Long id,
-                              @Valid CreateBookRequestDto requestDto) {
+                              @RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.update(id, requestDto);
     }
 
