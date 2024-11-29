@@ -19,7 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private static final String ENCODING_SCHEME = "Bearer";
+    private static final String ENCODING_SCHEME = "Bearer ";
     private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
 
@@ -45,7 +45,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private String getToken(HttpServletRequest request) {
         String bearerToken = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(ENCODING_SCHEME)) {
-            return bearerToken.substring(ENCODING_SCHEME.length() + 1);
+            return bearerToken.substring(ENCODING_SCHEME.length());
         }
         return null;
     }
