@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
+
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -35,6 +37,7 @@ public class CategoryController {
     private final BookService bookService;
 
     @PreAuthorize("hasRole('ADMIN')")
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @Operation(summary = "Create new category", description = "Add new category to DB")
     public CategoryDto createCategory(@RequestBody @Valid CreateCategoryRequestDto requestDto) {
@@ -57,7 +60,7 @@ public class CategoryController {
     @PutMapping("/{id}")
     @Operation(summary = "Update category", description = "Update category by id")
     public CategoryDto updateCategory(
-            @PathVariable @Valid Long id,
+            @PathVariable @Positive Long id,
             @RequestBody @Valid CreateCategoryRequestDto categoryDto) {
         return categoryService.update(id, categoryDto);
     }
@@ -70,7 +73,7 @@ public class CategoryController {
         categoryService.deleteById(id);
     }
 
-    @GetMapping("/by-categoryId")
+    @GetMapping("/{categoryId}/books")
     public List<BookDtoWithoutCategoryIds> getBooksByCategoryId(@RequestParam Long categoryId) {
         return bookService.getBooksByCategoryId(categoryId);
     }

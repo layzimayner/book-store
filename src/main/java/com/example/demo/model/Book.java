@@ -29,23 +29,32 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private String title;
+
     @Column(nullable = false)
     private String author;
+
     @Column(unique = true, nullable = false)
     private String isbn;
+
     @Column(nullable = false)
     private BigDecimal price;
+
     private String description;
     private String coverImage;
+
     @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
     private boolean isDeleted = false;
-    @ManyToMany(fetch = FetchType.LAZY)
+
+    @Column(nullable = false)
+    @ManyToMany
     @JoinTable(
             name = "books_categories",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Category> categories;
