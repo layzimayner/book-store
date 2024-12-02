@@ -2,6 +2,7 @@ package com.example.demo.dto.book;
 
 import com.example.demo.annotation.unique.Unique;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -21,6 +22,6 @@ public class CreateBookRequestDto {
     private BigDecimal price;
     private String description;
     private String coverImage;
-    @NotBlank
+    @NotEmpty
     private Set<Long> categoriesIds;
 }
