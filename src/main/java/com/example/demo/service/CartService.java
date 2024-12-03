@@ -3,18 +3,18 @@ package com.example.demo.service;
 import com.example.demo.dto.cart.CartDto;
 import com.example.demo.dto.item.CreateItemRequestDro;
 import com.example.demo.dto.item.UpdateItemRequestDto;
-import org.springframework.security.core.Authentication;
+import com.example.demo.model.User;
 
 public interface CartService {
-    CartDto getCart(Authentication authentication);
+    CartDto getCart(Long userId);
 
     CartDto addItemToCart(CreateItemRequestDro requestDro,
-                          Authentication authentication);
+                          User user);
 
     CartDto updateItemQuantity(Long id,
                                UpdateItemRequestDto requestDro,
-                               Authentication authentication);
+                               User user);
 
     void deleteItemFromCart(Long id,
-                            Authentication authentication);
+                            User user);
 }

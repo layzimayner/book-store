@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.cart.CartDto;
 import com.example.demo.dto.item.CreateItemRequestDro;
 import com.example.demo.dto.item.UpdateItemRequestDto;
+import com.example.demo.model.User;
 import com.example.demo.service.CartService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,31 +33,36 @@ public class CartController {
     @GetMapping
     @Operation(summary = "Get sopping cart", description = "Return user's cart")
     public CartDto getCart(Authentication authentication) {
-        return cartService.getCart(authentication);
+        Long userId = ((User) authentication.getPrincipal()).getId();
+        return cartService.getCart(userId);
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Add item to cart", description = "Add item to user's cart")
     public CartDto addItemToCart(@RequestBody @Valid CreateItemRequestDro requestDro,
                                  Authentication authentication) {
-        return cartService.addItemToCart(requestDro, authentication);
+        User user = (User) authentication.getPrincipal();
+        return cartService.addItemToCart(requestDro, user);
     }
 
     @PutMapping("/{cartItemId}")
     @Operation(summary = "Change quantity of item",
             description = "Change quantity of item, selected by id")
-    public CartDto updateItemQuantity(@PathVariable Long id,
+    public CartDto updateItemQuantity(@PathVariable Long cartItemId,
                                       @RequestBody @Valid UpdateItemRequestDto requestDro,
                                       Authentication authentication) {
-        return cartService.updateItemQuantity(id, requestDro, authentication);
+        User user = (User) authentication.getPrincipal();
+        return cartService.updateItemQuantity(cartItemId, requestDro, user);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{cartItemId}")
     @Operation(summary = "Remove item from cart",
             description = "Delete item, selected by id")
-    public void deleteItemFromCart(@PathVariable Long id,
+    public void deleteItemFromCart(@PathVariable Long cartItemId,
                                    Authentication authentication) {
-        cartService.deleteItemFromCart(id, authentication);
+        User user = (User) authentication.getPrincipal();
+        cartService.deleteItemFromCart(cartItemId, user);
     }
 }
