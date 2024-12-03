@@ -1,7 +1,6 @@
 package com.example.demo.dto.book;
 
 import lombok.Data;
-
 import java.math.BigDecimal;
 
 @Data

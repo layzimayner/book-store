@@ -1,13 +1,15 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.book.BookDto;
+import com.example.demo.dto.book.BookDtoWithoutCategoryIds;
 import com.example.demo.dto.book.CreateBookRequestDto;
 import com.example.demo.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import java.util.List;
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,11 +30,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/books")
 @Validated
 public class BookController {
-    private BookService bookService;
+    private final BookService bookService;
 
     @GetMapping
     @Operation(summary = "Get all books", description = "Get a list of all available books")
-    public List<BookDto> getAllBooks(Pageable pageable) {
+    public Page<BookDtoWithoutCategoryIds> getAllBooks(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
@@ -40,25 +42,26 @@ public class BookController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete book", description = "Delete book by id")
-    public void deleteBook(@PathVariable @Valid Long id) {
+    public void deleteBook(@PathVariable @Positive Long id) {
         bookService.delete(id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     @Operation(summary = "Update book", description = "Update book by id")
-    public BookDto updateBook(@PathVariable @Valid Long id,
-                              @Valid CreateBookRequestDto requestDto) {
+    public BookDto updateBook(@PathVariable @Positive Long id,
+                              @RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.update(id, requestDto);
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get book by id", description = "Get book by id")
-    public BookDto getBookById(@PathVariable @Valid Long id) {
+    public BookDto getBookById(@PathVariable @Positive Long id) {
         return bookService.findById(id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @Operation(summary = "Create new book", description = "Add new book to DB")
     public BookDto createBook(@RequestBody @Valid CreateBookRequestDto requestDto) {

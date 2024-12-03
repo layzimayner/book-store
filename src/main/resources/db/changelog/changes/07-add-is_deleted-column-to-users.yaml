@@ -12,4 +12,3 @@ databaseChangeLog:
                   defaultValue: 0
                   constraints:
                     nullable: false
-
