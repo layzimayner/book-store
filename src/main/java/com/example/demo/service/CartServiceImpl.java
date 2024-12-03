@@ -11,7 +11,7 @@ import com.example.demo.model.ShoppingCart;
 import com.example.demo.model.User;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.CartItemRepository;
-import com.example.demo.repository.CartRepository;
+import com.example.demo.repository.ShoppingCartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
-    private final CartRepository cartRepository;
+    private final ShoppingCartRepository cartRepository;
     private final CartMapper cartMapper;
     private final BookRepository bookRepository;
     private final CartItemRepository cartItemRepository;
@@ -48,7 +48,7 @@ public class CartServiceImpl implements CartService {
 
         if (cartItem == null) {
             cartItem = new CartItem();
-            cartItem.setSoppingCart(shoppingCart);
+            cartItem.setShoppingCart(shoppingCart);
             cartItem.setBook(book);
             cartItem.setQuantity(requestDto.getQuantity());
             shoppingCart.getCartItems().add(cartItem);

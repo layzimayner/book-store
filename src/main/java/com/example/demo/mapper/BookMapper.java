@@ -18,6 +18,6 @@ public interface BookMapper {
 
     @Named("bookFromId")
     default Book bookFromId(Long id) {
-
+       return new Book(id);
     }
 }
