@@ -50,19 +50,12 @@ public class Book {
     @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
     private boolean isDeleted = false;
 
-<<<<<<< HEAD
-    public Book(Long id) {
-        this.id = id;
-    }
-=======
     @ManyToMany
     @JoinTable(
             name = "books_categories",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Category> categories = new HashSet<>();
->>>>>>> 6e34b79fcda4b1bdad09137d84008da7f8c04554
 }

@@ -12,7 +12,6 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.Named;
 
 @Mapper(config = MapperConfig.class, uses = CategoryMapper.class)
 public interface BookMapper {
@@ -23,11 +22,6 @@ public interface BookMapper {
     Book toModel(CreateBookRequestDto requestDto);
 
     void updateBookFromDto(CreateBookRequestDto requestDto, @MappingTarget Book book);
-
-    @Named("bookFromId")
-    default Book bookFromId(Long id) {
-        return new Book(id);
-    }
 
     BookDtoWithoutCategoryIds toDtoWithoutCategories(Book book);
 

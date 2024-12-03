@@ -39,7 +39,8 @@ public class CartServiceImpl implements CartService {
         ShoppingCart shoppingCart = cartRepository.getCart(user);
 
         Book book = bookRepository.findById(requestDto.getBookId())
-                .orElseThrow(() -> new EntityNotFoundException("Book not found with ID: " + requestDto.getBookId()));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Book not found with ID: " + requestDto.getBookId()));
 
         CartItem cartItem = shoppingCart.getCartItems().stream()
                 .filter(item -> item.getBook().getId().equals(book.getId()))
@@ -69,7 +70,8 @@ public class CartServiceImpl implements CartService {
         ShoppingCart shoppingCart = cartRepository.getCart(user);
 
         CartItem cartItem = cartItemRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Cart item not found with ID: " + id));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Cart item not found with ID: " + id));
 
         if (!shoppingCart.getCartItems().contains(cartItem)) {
             throw new EntityNotFoundException("Cart item does not belong to the user's cart");
@@ -87,7 +89,8 @@ public class CartServiceImpl implements CartService {
         ShoppingCart shoppingCart = cartRepository.getCart(user);
 
         CartItem cartItem = cartItemRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Cart item not found with ID: " + id));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Cart item not found with ID: " + id));
 
         if (!shoppingCart.getCartItems().contains(cartItem)) {
             throw new EntityNotFoundException("Cart item does not belong to the user's cart");
