@@ -8,6 +8,7 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.util.Objects;
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,7 @@ public class ShoppingCart {
     @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CartItem> cartItems;
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -33,12 +35,12 @@ public class ShoppingCart {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CartItem cartItem = (CartItem) o;
-        return id != null && id.equals(cartItem.getId());
+        ShoppingCart that = (ShoppingCart) o;
+        return id != null && id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return 31;
+        return Objects.hash(id);
     }
 }

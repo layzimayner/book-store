@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Positive;
+import java.util.Objects;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,7 +29,6 @@ public class CartItem {
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
-    @Positive
     private int quantity;
 
     @Override
@@ -46,6 +45,6 @@ public class CartItem {
 
     @Override
     public int hashCode() {
-        return 31;
+        return Objects.hash(id, quantity);
     }
 }

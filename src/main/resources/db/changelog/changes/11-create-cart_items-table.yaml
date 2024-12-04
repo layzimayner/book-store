@@ -29,7 +29,3 @@ databaseChangeLog:
                   referencedTableName: shopping_carts
                   referencedColumnNames: id
                   onDelete: CASCADE
-              - addCheckConstraint:
-                  tableName: cart_items
-                  constraintName: check_positive_quantity
-                  checkCondition: "quantity > 0"
