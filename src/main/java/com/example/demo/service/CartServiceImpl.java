@@ -44,7 +44,7 @@ public class CartServiceImpl implements CartService {
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Shopping cart not found for user ID: " + user.getId()));
 
-        Book book = bookRepository.findById(requestDto.getBookId())
+        Book book = bookRepository.findByIdWithCategories(requestDto.getBookId())
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Book not found with ID: " + requestDto.getBookId()));
 

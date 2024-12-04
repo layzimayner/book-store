@@ -45,6 +45,6 @@ public class CartItem {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, quantity);
+        return Objects.hash(id);
     }
 }
