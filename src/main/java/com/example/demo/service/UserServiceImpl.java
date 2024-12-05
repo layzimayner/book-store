@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final CartService cartService;
     private final UserMapper userMapper;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
@@ -30,6 +31,8 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.toModel(requestDto);
         user.setRoles(Set.of(roleRepository.findByName(Role.RoleName.USER)));
         user.setPassword(passwordEncoder.encode(requestDto.getPassword()));
+        cartService.createShoppingCartForUser(user);
+
         return userMapper.toUserResponseDto(userRepository.save(user));
     }
 }
