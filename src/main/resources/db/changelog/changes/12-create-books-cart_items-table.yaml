@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-books-categories_items-table
+      author: coder
+      changes:
+        - createTable:
+            tableName: book_carts_items
+            columns:
+              - column:
+                  name: book_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cart_item_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: book_carts_items
+            baseColumnNames: book_id
+            referencedTableName: books
+            referencedColumnNames: id
+            constraintName: fk_book_carts_items_book_id
+        - addForeignKeyConstraint:
+            baseTableName: book_carts_items
+            baseColumnNames: cart_item_id
+            referencedTableName: cart_items
+            referencedColumnNames: id
+            constraintName: fk_book_carts_items_cart_item_id
+        - addPrimaryKey:
+            tableName: book_carts_items
+            columnNames: book_id, cart_item_id
