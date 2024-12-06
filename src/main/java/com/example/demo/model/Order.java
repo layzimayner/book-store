@@ -1,23 +1,33 @@
 package com.example.demo.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedAttributeNode;
+import jakarta.persistence.NamedEntityGraph;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 @Entity
+@NamedEntityGraph(
+        name = "Order.withOrderItems",
+        attributeNodes = @NamedAttributeNode("orderItems")
+)
 @Setter
 @Getter
 @Table(name = "orders")
@@ -28,11 +38,13 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Column(nullable = false)
-    private Status status;
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.IN_PROGRESS;
 
     @Column(nullable = false)
     private BigDecimal total;
@@ -43,8 +55,12 @@ public class Order {
     @Column(nullable = false)
     private String shippingAddress;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "OrderItem_id", nullable = false)
     private Set<OrderItem> orderItems;
+
+    @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
+    private boolean isDeleted = false;
 
     public enum Status {
         EXECUTED,
