@@ -14,12 +14,12 @@ import com.example.demo.model.User;
 import com.example.demo.repository.OrderItemRepository;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.repository.ShoppingCartRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -72,7 +72,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderItemDto findItemFormOrder(Long orderId, Long itemId, Long userId) {
-        OrderItem orderItem = orderItemRepository.findByIdAndOrderIdAndUserId(itemId, orderId, userId)
+        OrderItem orderItem = orderItemRepository
+                .findByIdAndOrderIdAndUserId(itemId, orderId, userId)
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Order item not found or does not belong to the user"));
         return orderItemMapper.toDto(orderItem);
