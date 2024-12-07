@@ -16,9 +16,10 @@ import com.example.demo.repository.OrderRepository;
 import com.example.demo.repository.ShoppingCartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,12 +31,16 @@ public class OrderServiceImpl implements OrderService {
     private final OrderItemRepository orderItemRepository;
 
     @Override
-    public void saveOrder(PlaceOrderRequestDto requestDto, User user) {
+    public OrderDto saveOrder(PlaceOrderRequestDto requestDto, User user) {
         ShoppingCart shoppingCart = shoppingCartRepository
                 .getCartByUserId(user.getId()).orElseThrow(() ->
                 new EntityNotFoundException("Can't find user's shopping cart"));
-        orderRepository.save(orderMapper.toOrder(shoppingCart,
-                requestDto.getShippingAddress(), user));
+        if (shoppingCart.getCartItems().isEmpty()) {
+            throw new RuntimeException("User with id " + user.getId()
+                    + ", has not items in cart");
+        }
+        return orderMapper.toDto(orderRepository.save(orderMapper.toOrder(shoppingCart,
+                requestDto.getShippingAddress(), user)));
     }
 
     @Override
@@ -45,37 +50,31 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void changeStatus(Long orderId, ChangeOrderStatusRequestDto requestDto) {
+    public OrderDto changeStatus(Long orderId, ChangeOrderStatusRequestDto requestDto) {
         Order order = orderRepository.findById(orderId).orElseThrow(() ->
                 new EntityNotFoundException("Can't update order with id "
                         + orderId + " because it does not exist")
         );
         order.setStatus(requestDto.status());
-        orderRepository.save(order);
+        return orderMapper.toDto(orderRepository.save(order));
     }
 
     @Override
     public Page<OrderItemDto> findItemsByOrderId(Long orderId, Pageable pageable, Long userId) {
-        Order order = orderRepository.findByIdIncludeUserId(orderId).orElseThrow(() ->
-                new EntityNotFoundException("Can't find order with id " + orderId));
-
-        if (!order.getUser().getId().equals(userId)) {
-            throw new AccessDeniedException("Order don't belongs to user");
-        }
-        return orderItemRepository.findByOrderId(orderId, pageable)
-                .map(orderItemMapper::toDto);
+        Order order = orderRepository.findByIdAndUserId(orderId, userId)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Order not found or does not belong to the user"));
+        List<OrderItemDto> orderItemDto = order.getOrderItems().stream()
+                .map(orderItemMapper::toDto)
+                .toList();
+        return new PageImpl<>(orderItemDto, pageable, orderItemDto.size());
     }
 
     @Override
     public OrderItemDto findItemFormOrder(Long orderId, Long itemId, Long userId) {
-        Order order = orderRepository.findByIdIncludeUserId(orderId).orElseThrow(() ->
-                new EntityNotFoundException("Can't find order with id " + orderId));
-
-        if (!order.getUser().getId().equals(userId)) {
-            throw new AccessDeniedException("Order don't belongs to user");
-        }
-        OrderItem orderItem = orderItemRepository.findByItemId(itemId).orElseThrow(() ->
-                new EntityNotFoundException("Can't find item with id " + itemId));
+        OrderItem orderItem = orderItemRepository.findByIdAndOrderIdAndUserId(itemId, orderId, userId)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Order item not found or does not belong to the user"));
         return orderItemMapper.toDto(orderItem);
     }
 }

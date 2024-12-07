@@ -24,10 +24,6 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 @Entity
-@NamedEntityGraph(
-        name = "Order.withOrderItems",
-        attributeNodes = @NamedAttributeNode("orderItems")
-)
 @Setter
 @Getter
 @Table(name = "orders")
@@ -56,7 +52,6 @@ public class Order {
     private String shippingAddress;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "OrderItem_id", nullable = false)
     private Set<OrderItem> orderItems;
 
     @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")

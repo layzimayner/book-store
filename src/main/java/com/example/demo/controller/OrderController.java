@@ -37,10 +37,10 @@ public class OrderController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Place new order", description = "Add new order to DB")
-    public void placeAnOrder(@RequestBody @Valid PlaceOrderRequestDto requestDto,
+    public OrderDto placeAnOrder(@RequestBody @Valid PlaceOrderRequestDto requestDto,
                              Authentication authentication) {
         User user = (User) authentication.getPrincipal();
-        orderService.saveOrder(requestDto, user);
+        return orderService.saveOrder(requestDto, user);
     }
 
     @GetMapping
@@ -54,9 +54,9 @@ public class OrderController {
     @PutMapping("/{orderId}")
     @Operation(summary = "Update order status",
             description = "Set status executed for order, by id")
-    public void updateOrderStatus(@PathVariable @Positive Long orderId,
+    public OrderDto updateOrderStatus(@PathVariable @Positive Long orderId,
                                   @RequestBody @Valid ChangeOrderStatusRequestDto requestDto) {
-        orderService.changeStatus(orderId, requestDto);
+        return orderService.changeStatus(orderId, requestDto);
     }
 
     @GetMapping("/{orderId}/items")
