@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
+import jakarta.persistence.NamedAttributeNode;
+import jakarta.persistence.NamedEntityGraph;
+import jakarta.persistence.NamedSubgraph;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -15,6 +18,16 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
+@NamedEntityGraph(
+        name = "ShoppingCart.withOrderItemsAndBooks",
+        attributeNodes = @NamedAttributeNode(value = "cartItems", subgraph = "cartItemsWithBook"),
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "cartItemsWithBook",
+                        attributeNodes = @NamedAttributeNode("book")
+                )
+        }
+)
 @Getter
 @Setter
 @EqualsAndHashCode
