@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.cart.CartDto;
-import com.example.demo.dto.item.CreateItemRequestDro;
-import com.example.demo.dto.item.UpdateItemRequestDto;
+import com.example.demo.dto.item.CreateCartItemRequestDro;
+import com.example.demo.dto.item.UpdateCartItemRequestDto;
 import com.example.demo.model.User;
 import com.example.demo.service.CartService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,7 +40,7 @@ public class CartController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Add item to cart", description = "Add item to user's cart")
-    public CartDto addItemToCart(@RequestBody @Valid CreateItemRequestDro requestDro,
+    public CartDto addItemToCart(@RequestBody @Valid CreateCartItemRequestDro requestDro,
                                  Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         return cartService.addItemToCart(requestDro, user);
@@ -50,7 +50,7 @@ public class CartController {
     @Operation(summary = "Change quantity of item",
             description = "Change quantity of item, selected by id")
     public CartDto updateItemQuantity(@PathVariable Long cartItemId,
-                                      @RequestBody @Valid UpdateItemRequestDto requestDro,
+                                      @RequestBody @Valid UpdateCartItemRequestDto requestDro,
                                       Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         return cartService.updateItemQuantity(cartItemId, requestDro, user);

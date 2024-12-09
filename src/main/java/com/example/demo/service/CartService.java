@@ -1,18 +1,18 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.cart.CartDto;
-import com.example.demo.dto.item.CreateItemRequestDro;
-import com.example.demo.dto.item.UpdateItemRequestDto;
+import com.example.demo.dto.item.CreateCartItemRequestDro;
+import com.example.demo.dto.item.UpdateCartItemRequestDto;
 import com.example.demo.model.User;
 
 public interface CartService {
     CartDto getCart(Long userId);
 
-    CartDto addItemToCart(CreateItemRequestDro requestDro,
+    CartDto addItemToCart(CreateCartItemRequestDro requestDro,
                           User user);
 
     CartDto updateItemQuantity(Long id,
-                               UpdateItemRequestDto requestDro,
+                               UpdateCartItemRequestDto requestDro,
                                User user);
 
     void deleteItemFromCart(Long id,
