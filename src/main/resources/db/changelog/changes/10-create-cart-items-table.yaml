@@ -29,12 +29,14 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - addForeignKeyConstraint:
+                  constraintName: fk_cart_items_shopping_cart_id
                   baseTableName: cart_items
                   baseColumnNames: shopping_cart_id
                   referencedTableName: shopping_carts
                   referencedColumnNames: id
                   onDelete: CASCADE
               - addForeignKeyConstraint:
+                  constraintName: fk_cart_items_book_id
                   baseTableName: cart_items
                   baseColumnNames: book_id
                   referencedTableName: books
