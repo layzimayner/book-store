@@ -16,12 +16,12 @@ databaseChangeLog:
   - include:
       file: db/changelog/changes/08-create-books-categories-table.yaml
   - include:
-      file: db/changelog/changes/09-create-shopping_carts-table.yaml
+      file: db/changelog/changes/09-create-shopping-carts-table.yaml
   - include:
-      file: db/changelog/changes/10-create-cart_items-table.yaml
+      file: db/changelog/changes/10-create-cart-items-table.yaml
   - include:
-      file: db/changelog/changes/11-create-books-cart_items-table.yaml
+      file: db/changelog/changes/11-create-books-cart-items-table.yaml
   - include:
       file: db/changelog/changes/12-create-orders-table.yaml
   - include:
-      file: db/changelog/changes/13-create-order_items-table.yaml
+      file: db/changelog/changes/13-create-order-items-table.yaml

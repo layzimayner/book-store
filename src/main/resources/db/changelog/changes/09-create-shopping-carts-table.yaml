@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-shopping_carts-table
+      id: create-shopping-carts-table
       author: coder
       changes:
         - createTable:
