@@ -8,9 +8,7 @@ import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cglib.core.internal.Function;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +24,7 @@ public class JwtUtil {
         }
         this.secret = Keys.hmacShaKeyFor(secretString.getBytes(StandardCharsets.UTF_8));
 
-        String expirationString = environment.getProperty("jwt.expiration", "3600000"); // Default: 1 hour
+        String expirationString = environment.getProperty("jwt.expiration", "3600000");
         this.expiration = Long.parseLong(expirationString);
         System.out.println("JWT Secret: " + environment.getProperty("jwt.secret"));
         System.out.println("JWT Expiration: " + environment.getProperty("jwt.expiration"));
