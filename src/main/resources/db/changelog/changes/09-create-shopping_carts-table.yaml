@@ -13,6 +13,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
         - addForeignKeyConstraint:
+            constraintName: fk_shopping_cart_user_id
             baseTableName: shopping_carts
             baseColumnNames: user_id
             referencedTableName: users

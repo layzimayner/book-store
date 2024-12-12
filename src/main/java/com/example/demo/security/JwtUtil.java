@@ -10,16 +10,26 @@ import java.security.Key;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cglib.core.internal.Function;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JwtUtil {
     private final Key secret;
-    @Value("${jwt.expiration}")
-    private long expiration;
+    private final long expiration;
 
-    public JwtUtil(@Value("${jwt.secret}")String secretString) {
-        secret = Keys.hmacShaKeyFor(secretString.getBytes(StandardCharsets.UTF_8));
+    public JwtUtil(Environment environment) {
+        String secretString = environment.getProperty("jwt.secret");
+        if (secretString == null || secretString.isBlank()) {
+            throw new IllegalArgumentException("JWT secret is not configured");
+        }
+        this.secret = Keys.hmacShaKeyFor(secretString.getBytes(StandardCharsets.UTF_8));
+
+        String expirationString = environment.getProperty("jwt.expiration", "3600000"); // Default: 1 hour
+        this.expiration = Long.parseLong(expirationString);
+        System.out.println("JWT Secret: " + environment.getProperty("jwt.secret"));
+        System.out.println("JWT Expiration: " + environment.getProperty("jwt.expiration"));
     }
 
     public String generateToken(String email) {
