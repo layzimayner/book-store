@@ -73,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderItemDto findItemFormOrder(Long orderId, Long itemId, Long userId) {
         OrderItem orderItem = orderItemRepository
-                .findByIdAndOrderIdAndUserId(itemId, orderId, userId)
+                .findByIdAndOrderIdAndOrder_User_Id(itemId, orderId, userId)
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Order item not found or does not belong to the user"));
         return orderItemMapper.toDto(orderItem);
