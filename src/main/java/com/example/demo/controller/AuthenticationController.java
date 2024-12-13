@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "users authorization management",
         description = "Endpoints for management authorisation")
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/auth")
 @Validated
 @RequiredArgsConstructor
 public class AuthenticationController {
