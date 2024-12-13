@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-books-categories_items-table
+      id: create-books-categories-items-table
       author: coder
       changes:
         - createTable:

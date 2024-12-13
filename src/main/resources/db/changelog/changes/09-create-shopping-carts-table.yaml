@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-shopping_carts-table
+      id: create-shopping-carts-table
       author: coder
       changes:
         - createTable:
@@ -13,6 +13,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
         - addForeignKeyConstraint:
+            constraintName: fk_shopping_cart_user_id
             baseTableName: shopping_carts
             baseColumnNames: user_id
             referencedTableName: users

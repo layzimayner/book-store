@@ -4,7 +4,7 @@ databaseChangeLog:
       author: coder
       changes:
         - createTable:
-            tableName: books-categories
+            tableName: books_categories
             columns:
               - column:
                   name: book_id
@@ -17,17 +17,17 @@ databaseChangeLog:
                   constraints:
                     nullable: false
         - addForeignKeyConstraint:
-            baseTableName: books-categories
+            baseTableName: books_categories
             baseColumnNames: book_id
             referencedTableName: books
             referencedColumnNames: id
-            constraintName: fk_books-categories_book_id
+            constraintName: fk_books_categories_book_id
         - addForeignKeyConstraint:
-            baseTableName: books-categories
+            baseTableName: books_categories
             baseColumnNames: category_id
             referencedTableName: categories
             referencedColumnNames: id
-            constraintName: fk_books-categories_category_id
+            constraintName: fk_books_categories_category_id
         - addPrimaryKey:
-            tableName: books-categories
+            tableName: books_categories
             columnNames: book_id, category_id
