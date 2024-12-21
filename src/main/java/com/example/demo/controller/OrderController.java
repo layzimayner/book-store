@@ -50,7 +50,7 @@ public class OrderController {
         return orderService.findOrders(pageable, user.getId());
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{orderId}")
     @Operation(summary = "Update order status",
             description = "Set status executed for order, by id")

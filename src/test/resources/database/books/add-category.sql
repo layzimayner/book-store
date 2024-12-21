@@ -1,0 +1,1 @@
+INSERT INTO categories (name, id) VALUES ('Category1', 3);

@@ -1,9 +1,10 @@
-package application.tests.config;
+package com.example.demo.config;
 
 import org.testcontainers.containers.MySQLContainer;
 
 public class CustomMySqlContainer extends MySQLContainer<CustomMySqlContainer> {
-    private static final String DB_IMAGE = "mysql:8";
+    private static final String DB_IMAGE = "mysql:8.2.0";
+
     private static CustomMySqlContainer mySqlContainer;
 
     private CustomMySqlContainer() {
