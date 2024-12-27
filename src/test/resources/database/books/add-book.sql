@@ -1,2 +1,2 @@
-INSERT INTO books ( title, author, isbn, price)
-VALUES ('title1','Author1', '1111111111', 11.1);
+INSERT INTO books (id, title, author, isbn, price)
+VALUES (4, 'title1','Author1', '1111111111', 11.1);
