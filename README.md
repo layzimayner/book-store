@@ -23,8 +23,8 @@ More specific endpoints include:
 Before launching the application, remember to configure the application. properties file
 and .env. An example of the variables is provided in .env.sample.
 Additionally, the MySQL database must include a schema named book_store.
-![Alt text](screenshot/Знімок екрана 2024-12-28 222347.png "Screenshot sample")
-![Alt text](screenshot/Знімок екрана 2024-12-28 222150.png "Screenshot sample")
+![Alt text](screenshot/env.png "Screenshot sample")
+![Alt text](screenshot/application.propeties.png "Screenshot sample")
 
 As my first project, it raised many questions and challenges, especially during the testing phase.
 However, thanks to advice from kind and supportive individuals and my eagerness to learn,
