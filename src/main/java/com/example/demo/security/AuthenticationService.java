@@ -3,7 +3,6 @@ package com.example.demo.security;
 import com.example.demo.dto.user.UserLoginRequestDto;
 import com.example.demo.dto.user.UserLoginResponseDto;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,7 +22,7 @@ public class AuthenticationService {
         );
         List<String> roles = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
+                .toList();
         String token = jwtUtil.generateToken(authentication.getName(), roles);
         return new UserLoginResponseDto(token);
     }
