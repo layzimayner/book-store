@@ -11,7 +11,7 @@ databaseChangeLog:
                   value: "admin@example.com"
               - column:
                   name: password
-                  value: "$2a$10$EixZaYVK1fsbw1Zfbx3OpOJ93t9aWxoDGv4l5dy4o.dSEe8cQFcW2"
+                  value: "$2a$10$E8cObOBzBnZ1Gp6XZPg5.e5Hfl9K9SMK1X.0b8ob2HOFSaiGKD2yG"
               - column:
                   name: first_name
                   value: "Admin"
@@ -29,7 +29,7 @@ databaseChangeLog:
                   value: "user@example.com"
               - column:
                   name: password
-                  value: "$2a$10$ZUvCdPLg3RcG6z9CNnCZ5uH/ZojEqvPnZG5nQDOPqLRJwD6Tc5aJeW"
+                  value: "$2a$10$MmJGjQ2Yt8qWKLz2A6N2eO98RbzzhPl.A7lDR6M/WZPVi4RWiZ31G"
               - column:
                   name: first_name
                   value: "Regular"

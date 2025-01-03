@@ -1,3 +1,4 @@
+![Alt text](screenshot/bookStore.png "book store")
 This project was created as a useful tool to simplify accounting, sales,
 and information gathering for use by a bookstore.
 
@@ -5,7 +6,48 @@ The project is built on Spring, with the addition of Boot, Security, and Data JP
 aimed at reducing boilerplate code and simplifying testing.
 To ensure the security of all sensitive data and maintain the stateless nature of the application,
 I implemented JWT tokens. Additionally, the inclusion of Swagger provides the ability to 
-interactively test how the application works.
+interactively test how the application works(http://localhost:8080/swagger-ui.html).
+To login, you must have email and password of user from DB
+Here is the entire list of frameworks/libraries:
+
+Core Technologies:
+1.Spring Boot:
+  * spring-boot-starter-web
+  * spring-boot-starter-data-jpa
+  * spring-boot-starter-security
+  * spring-boot-starter-test
+  * spring-boot-maven-plugin
+
+2.Databases:
+  * liquibase-core
+  * mysql-connector-j
+  * h2
+
+3.Validation:
+  * hibernate-validator
+
+4.Security:
+  * jjwt (JSON Web Token)
+  * spring-security-test
+
+5.Mapping:
+  * MapStruct
+  * lombok
+
+6.Documentation:
+  * springdoc-openapi-starter-webmvc-ui
+
+7.Testing:
+  * Testcontainers
+  * JUnit Jupiter
+
+8.Tools:
+  * maven-compiler-plugin
+  * maven-checkstyle-plugin
+
+Additional Technologies:
+Java 17
+Lombok MapStruct Binding
 
 In addition to standard controller endpoints like delete, create, update, find by ID, and get all,
 the project also includes publicly accessible endpoints such as:
