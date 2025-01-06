@@ -1,8 +1,10 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.cart.CartDto;
-import com.example.demo.dto.item.CreateCartItemRequestDro;
+import com.example.demo.dto.item.CartItemResponseDto;
+import com.example.demo.dto.item.CreateCartItemRequestDto;
 import com.example.demo.dto.item.UpdateCartItemRequestDto;
+import com.example.demo.dto.item.UpdatedQuantityDto;
 import com.example.demo.exception.EntityNotFoundException;
 import com.example.demo.mapper.CartMapper;
 import com.example.demo.model.Book;
@@ -28,14 +30,18 @@ public class CartServiceImpl implements CartService {
     @Override
     public CartDto getCart(Long userId) {
         return cartRepository.getCartByUserId(userId)
-                .map(cartMapper::toDto)
+                .map(cart -> {
+                    CartDto cartDto = cartMapper.toDto(cart);
+                    cartDto.setCartItems(cartMapper.mapCartItemsToDto(cart.getCartItems()));
+                    return cartDto;
+                })
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Shopping cart not found for user with ID: " + userId));
     }
 
     @Transactional
     @Override
-    public CartDto addItemToCart(CreateCartItemRequestDro requestDto, User user) {
+    public CartItemResponseDto addItemToCart(CreateCartItemRequestDto requestDto, User user) {
         ShoppingCart shoppingCart = cartRepository.getCartByUserId(user.getId())
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Shopping cart not found for user ID: " + user.getId()));
@@ -60,12 +66,13 @@ public class CartServiceImpl implements CartService {
         }
 
         cartRepository.save(shoppingCart);
-        return cartMapper.toDto(shoppingCart);
+        return cartMapper.toCartItemResponseDto(cartItem);
     }
 
     @Transactional
     @Override
-    public CartDto updateItemQuantity(Long id, UpdateCartItemRequestDto requestDto, User user) {
+    public UpdatedQuantityDto updateItemQuantity(Long id,
+                                                 UpdateCartItemRequestDto requestDto, User user) {
         ShoppingCart shoppingCart = cartRepository.getCartByUserId(user.getId())
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Shopping cart not found for user ID: " + user.getId()));
@@ -76,7 +83,7 @@ public class CartServiceImpl implements CartService {
 
         cartItem.setQuantity(requestDto.getQuantity());
         cartItemRepository.save(cartItem);
-        return cartMapper.toDto(shoppingCart);
+        return cartMapper.toUpdatedDto(cartItem);
     }
 
     @Transactional
