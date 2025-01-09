@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.config.MapperConfig;
+import com.example.demo.dto.item.OrderItemDto;
 import com.example.demo.dto.order.OrderDto;
 import com.example.demo.model.Order;
 import com.example.demo.model.OrderItem;
@@ -14,6 +15,8 @@ import org.mapstruct.Mapping;
 
 @Mapper(config = MapperConfig.class)
 public interface OrderMapper {
+    @Mapping(target = "orderId", source = "id")
+    @Mapping(target = "userId", source = "user.id")
     OrderDto toDto(Order order);
 
     @Mapping(target = "id", ignore = true)
@@ -24,6 +27,10 @@ public interface OrderMapper {
     @Mapping(target = "total",
             expression = "java(calculateTotal(mapOrderItems(shoppingCart, order)))")
     Order toOrder(ShoppingCart shoppingCart, String shippingAddress, User user);
+
+    @Mapping(target = "orderItemId", source = "id")
+    @Mapping(target = "bookId", source = "book.id")
+    OrderItemDto toOrderItemDto(OrderItem orderItem);
 
     default Set<OrderItem> mapOrderItems(ShoppingCart shoppingCart, Order order) {
         return shoppingCart.getCartItems().stream()
@@ -43,5 +50,11 @@ public interface OrderMapper {
         return items.stream()
                 .map(OrderItem::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    default Set<OrderItemDto> mapOrderItemsToDto(Set<OrderItem> orderItems) {
+        return orderItems.stream()
+                .map(this::toOrderItemDto)
+                .collect(Collectors.toSet());
     }
 }

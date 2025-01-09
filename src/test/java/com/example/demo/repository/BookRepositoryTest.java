@@ -13,9 +13,9 @@ import java.util.Optional;
 
 @DataJpaTest
 @Testcontainers
-@Sql(scripts = "classpath:database/books/insert-books-and-categories.sql",
+@Sql(scripts = "classpath:database/scripts/insert-books-and-categories.sql",
         executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
-@Sql(scripts = "classpath:database/books/cleanup-db.sql",
+@Sql(scripts = "classpath:database/scripts/cleanup-db.sql",
         executionPhase = Sql.ExecutionPhase.AFTER_TEST_CLASS)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class BookRepositoryTest {

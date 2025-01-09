@@ -15,6 +15,8 @@ import com.example.demo.repository.OrderItemRepository;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.repository.ShoppingCartRepository;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -45,8 +47,23 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Page<OrderDto> findOrders(Pageable pageable, Long userId) {
-        return orderRepository.findAllByUserId(userId, pageable)
-                .map(orderMapper::toDto);
+        Page<Order> ordersPage = orderRepository.findAllByUserId(userId, pageable);
+
+        List<Long> orderIds = ordersPage.getContent().stream()
+                .map(Order::getId)
+                .collect(Collectors.toList());
+
+        List<OrderItem> orderItems = orderItemRepository.findItemsByOrderIds(orderIds);
+
+        Map<Long, List<OrderItem>> itemsByOrderId = orderItems.stream()
+                .collect(Collectors.groupingBy(item -> item.getOrder().getId()));
+
+        return ordersPage.map(order -> {
+            OrderDto dto = orderMapper.toDto(order);
+            dto.setOrderItems(orderItemMapper
+                    .toDtos(itemsByOrderId.getOrDefault(order.getId(), List.of())));
+            return dto;
+        });
     }
 
     @Override

@@ -20,8 +20,6 @@ public interface CartMapper {
     @Mapping(source = "book.id", target = "bookId")
     CartItemResponseDto toCartItemResponseDto(CartItem cartItem);
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "cartItems", target = "cartItems")
     CartDto toDto(ShoppingCart shoppingCart);
 
     @Mapping(source = "id", target = "id")
@@ -29,12 +27,6 @@ public interface CartMapper {
     @Mapping(source = "book.title", target = "bookTitle")
     @Mapping(source = "quantity", target = "quantity")
     CartItemDto toCartItemDto(CartItem cartItem);
-
-    default Set<Long> mapCartItemsToIds(Set<CartItem> cartItems) {
-        return cartItems.stream()
-                .map(CartItem::getId)
-                .collect(Collectors.toSet());
-    }
 
     default Set<CartItemDto> mapCartItemsToDto(Set<CartItem> cartItems) {
         return cartItems.stream()
