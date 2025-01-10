@@ -1,4 +1,4 @@
-![Alt text](screenshot/bookStore.png "book store")
+![Alt text](src/main/resources/screenshots/bookStore.jpg/bookStore.png "book store")
 
 ## Table of Contents
 1. [Project Overview](#project-overview)
@@ -38,16 +38,19 @@ This project is built using Spring Boot and uses MySQL as the database for stori
    git clone https://github.com/layzimayner/book-store.git
 
 2. **Navigate to the project directory**
+   ```bash
    cd book-store
 
 3. **Install dependencies**
+   ```bash
    mvn clean install
 
 4. **Add configuration**
    Add an application.properties file to the src/main/resources directory with the following settings:
-![Alt text](screenshot/application.propeties.png "Screenshot sample")
+![Alt text](src/main/resources/screenshots/application.properties.png/application.propeties.png "Screenshot sample")
 
 5. **Run the project**
+   ```bash
    mvn spring-boot:run
 
 ---
@@ -68,7 +71,7 @@ book-store/
 │   │   │   ├── repository/      # JPA repositories
 │   │   │   ├── service/         # Business logic services
 │   │   │   └── Application      # Main entry point
-│   │   └──  resources/
+│   │   └── resources/
 │   │       ├── application.properties   # Configuration file
 │   │       ├── db.changelog/            # Liquibase changelog files
 │   │       ├── screenshots/             # Screenshots for README
@@ -77,7 +80,7 @@ book-store/
 │       ├── java/com/example/demo/       # Unit and integration tests
 │       ├── resources/
 │       │   ├── application.properties   # Test-specific configuration
-│       │   └── database/scripts/             # SQL scripts for testing
+│       │   └── database/scripts/        # SQL scripts for testing
 ├── pom.xml          # Maven build file
 └── README.md        # Project documentation
 
@@ -86,13 +89,15 @@ ___
 
 ## Key Features
 1. User Registration and Authentication:
-    Users can register, log in, and receive roles.
-2. Book Catalog:
-    Retrieve a list of books with filtering and pagination.
+    Users can register and  log in.
+2. Book Management:
+    Create, update, delete and find books from DB
 3. Cart Management:
     Add, remove, and view items in the shopping cart.
 4. Order Management:
     Place orders and view order history.
+5. Categories Management:
+    Create, update, delete, find and sort books by it categories
 
 ---
 
@@ -103,39 +108,39 @@ of all sensitive data and maintain the stateless nature of the application,
 I implemented JWT tokens .Here is the entire list of frameworks/libraries:  
 
 Core Technologies:
-1.Spring Boot:
+1. Spring Boot 3.3.4 :
   * spring-boot-starter-web
   * spring-boot-starter-data-jpa
   * spring-boot-starter-security
   * spring-boot-starter-test
   * spring-boot-maven-plugin
 
-2.Databases:
-  * liquibase-core
-  * mysql-connector-j
-  * h2
+2. Databases:
+  * liquibase-core Inherited from Spring Boot Parent
+  * mysql-connector-j 8.0.33
+  * h2 Inherited from Spring Boot Parent
 
-3.Validation:
-  * hibernate-validator
+3. Validation:
+  * hibernate-validator 8.0.1.Final
 
-4.Security:
-  * jjwt (JSON Web Token)
-  * spring-security-test
+4. Security:
+  * jjwt (JSON Web Token) 0.11.5
+  * spring-security-test Inherited from Spring Boot Parent
 
-5.Mapping:
-  * MapStruct
-  * lombok
+5. Mapping:
+  * MapStruct 1.5.5.Final
+  * Lombok MapStruct Binding: 0.2.0
 
-6.Documentation:
-  * springdoc-openapi-starter-webmvc-ui
+6. Documentation:
+  * springdoc-openapi-starter-webmvc-ui 2.6.0
 
-7.Testing:
-  * Testcontainers
-  * JUnit Jupiter
+7. Testing:
+  * Testcontainers 1.18.0
+  * JUnit Jupiter 5.10.0
 
-8.Tools:
-  * maven-compiler-plugin
-  * maven-checkstyle-plugin
+8. Tools:
+  * maven-compiler-plugin Uses Java version 17 from <java.version> property.
+  * maven-checkstyle-plugin 3.3.0
 
 ---
 
@@ -149,9 +154,9 @@ Also, use the user's data in Postman.Here are the instructions for importing a P
 
 1. Go to Postman using the provided link(https://www.postman.com/).
 2. Click on Import in the Postman interface.
-   ![Alt text](screenshot/selectImport.png "Select import")
+   ![Alt text](src/main/resources/screenshots/selectImport.png/selectImport.png "Select import")
 3. Select the option to upload a file.
-   ![Alt text](screenshot/selectImportOption.png "Select import option")
+   ![Alt text](src/main/resources/screenshots/selectImportOption.png/selectImportOption.png "Select import option")
 4. Locate the desired file using the path:
    book-store\src\main\resources\book store.postman_collection.json
 
