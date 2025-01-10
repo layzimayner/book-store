@@ -4,11 +4,10 @@
 1. [Project Overview](#project-overview)
 2. [Requirements](#requirements)
 3. [How to Run](#how-to-run)
-4. [Project Structure](#project-structure)
-5. [Key Features](#key-features)
-6. [Technology used](#technology-used)
-7. [Postmen and Swagger](#postman-and_swagger)
-8. [Database Schema and Relationships](#database-schema-and-relationships)
+4. [Key Features](#key-features)
+5. [Technology used](#technology-used)
+6. [Postmen and Swagger](#postman-and_swagger)
+7. [Database Schema and Relationships](#database-schema-and-relationships)
 
 ---
 
@@ -53,38 +52,6 @@ This project is built using Spring Boot and uses MySQL as the database for stori
 5. **Run the project**
    ```bash
    mvn spring-boot:run
-
----
-
-### Project Structure
-
-book-store/
-├── src/
-│   ├── main/
-│   │   ├── java/com/example/demo/
-│   │   │   ├── annotation/        # Custom annotations
-│   │   │   ├── config/            # Project configurations
-│   │   │   ├── controller/        # REST controllers
-│   │   │   ├── dto/               # Data Transfer Objects (DTOs)
-│   │   │   ├── exception/         # Custom exceptions and handlers
-│   │   │   ├── mapper/            # MapStruct mappers
-│   │   │   ├── model/             # Database entities
-│   │   │   ├── repository/        # JPA repositories
-│   │   │   ├── service/           # Business logic services
-│   │   │   └── Application.java   # Main entry point
-│   │   └── resources/
-│   │       ├── application.properties   # Configuration file
-│   │       ├── db.changelog/            # Liquibase changelog files
-│   │       ├── screenshots/             # Screenshots for README
-│   │       └── postmanCollection/       # Postman collections for API testing
-│   └── test/
-│       ├── java/com/example/demo/       # Unit and integration tests
-│       └── resources/
-│           ├── application.properties   # Test-specific configuration
-│           └── database/scripts/        # SQL scripts for testing
-├── pom.xml          # Maven build file
-└── README.md        # Project documentation
-
 
 ---
 
