@@ -86,7 +86,7 @@ book-store/
 └── README.md        # Project documentation
 
 
-___
+---
 
 ## Key Features
 1. User Registration and Authentication:
