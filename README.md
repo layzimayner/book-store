@@ -8,6 +8,7 @@
 5. [Key Features](#key-features)
 6. [Technology used](#technology-used)
 7. [Postmen and Swagger](#postman-and_swagger)
+8. [Database Schema and Relationships](#database schema and relationships)
 
 ---
 
@@ -172,6 +173,12 @@ More specific endpoints include:
 
 * POST orders
   Requires an authenticated user to create an order based on their account and shopping cart.
+
+---
+
+## Database Schema and Relationships
+
+![Alt text](src/main/resources/screenshots/dbSchema.png "DB schema")
 
 ---
 
