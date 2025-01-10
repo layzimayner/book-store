@@ -56,7 +56,7 @@ This project is built using Spring Boot and uses MySQL as the database for stori
 
 ---
 
-## Project Structure
+### Project Structure
 
 book-store/
 ├── src/
