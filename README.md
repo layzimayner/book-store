@@ -8,7 +8,7 @@
 5. [Key Features](#key-features)
 6. [Technology used](#technology-used)
 7. [Postmen and Swagger](#postman-and_swagger)
-8. [Database Schema and Relationships](#database schema and relationships)
+8. [Database Schema and Relationships](#database-schema-and-relationships)
 
 ---
 
@@ -62,16 +62,16 @@ book-store/
 ├── src/
 │   ├── main/
 │   │   ├── java/com/example/demo/
-│   │   │   ├── annotation/      # Custom annotations
-│   │   │   ├── config/          # Project configurations
-│   │   │   ├── controller/      # REST controllers
-│   │   │   ├── dto/             # Data Transfer Objects (DTOs)
-│   │   │   ├── exception/       # Custom exceptions and handlers
-│   │   │   ├── mapper/          # MapStruct mappers
-│   │   │   ├── model/           # Database entities
-│   │   │   ├── repository/      # JPA repositories
-│   │   │   ├── service/         # Business logic services
-│   │   │   └── Application      # Main entry point
+│   │   │   ├── annotation/        # Custom annotations
+│   │   │   ├── config/            # Project configurations
+│   │   │   ├── controller/        # REST controllers
+│   │   │   ├── dto/               # Data Transfer Objects (DTOs)
+│   │   │   ├── exception/         # Custom exceptions and handlers
+│   │   │   ├── mapper/            # MapStruct mappers
+│   │   │   ├── model/             # Database entities
+│   │   │   ├── repository/        # JPA repositories
+│   │   │   ├── service/           # Business logic services
+│   │   │   └── Application.java   # Main entry point
 │   │   └── resources/
 │   │       ├── application.properties   # Configuration file
 │   │       ├── db.changelog/            # Liquibase changelog files
@@ -79,9 +79,9 @@ book-store/
 │   │       └── postmanCollection/       # Postman collections for API testing
 │   └── test/
 │       ├── java/com/example/demo/       # Unit and integration tests
-│       ├── resources/
-│       │   ├── application.properties   # Test-specific configuration
-│       │   └── database/scripts/        # SQL scripts for testing
+│       └── resources/
+│           ├── application.properties   # Test-specific configuration
+│           └── database/scripts/        # SQL scripts for testing
 ├── pom.xml          # Maven build file
 └── README.md        # Project documentation
 
@@ -98,7 +98,7 @@ ___
 4. Order Management:
     Place orders and view order history.
 5. Categories Management:
-    Create, update, delete, find and sort books by it categories
+    Create, update, delete, find categories and sort books by it
 
 ---
 
