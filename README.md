@@ -1,4 +1,4 @@
-![Alt text](src/main/resources/screenshots/bookStore.jpg/bookStore.png "book store")
+![Alt text](src/main/resources/screenshots/bookStore.jpg "book store")
 
 ## Table of Contents
 1. [Project Overview](#project-overview)
@@ -47,7 +47,7 @@ This project is built using Spring Boot and uses MySQL as the database for stori
 
 4. **Add configuration**
    Add an application.properties file to the src/main/resources directory with the following settings:
-![Alt text](src/main/resources/screenshots/application.properties.png/application.propeties.png "Screenshot sample")
+![Alt text](src/main/resources/screenshots/application.properties.png "Screenshot sample")
 
 5. **Run the project**
    ```bash
@@ -154,9 +154,9 @@ Also, use the user's data in Postman.Here are the instructions for importing a P
 
 1. Go to Postman using the provided link(https://www.postman.com/).
 2. Click on Import in the Postman interface.
-   ![Alt text](src/main/resources/screenshots/selectImport.png/selectImport.png "Select import")
+   ![Alt text](src/main/resources/screenshots/selectImport.png "Select import")
 3. Select the option to upload a file.
-   ![Alt text](src/main/resources/screenshots/selectImportOption.png/selectImportOption.png "Select import option")
+   ![Alt text](src/main/resources/screenshots/selectImportOption.png "Select import option")
 4. Locate the desired file using the path:
    book-store\src\main\resources\book store.postman_collection.json
 
