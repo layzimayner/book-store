@@ -156,22 +156,31 @@ More specific endpoints include:
 
 2. Create env. file in project folder, with next fields:
 * MYSQLDB_DATABASE - Enter the name of your MySQL database.
+
   Example: my_database
 * MYSQLDB_ROOT_PASSWORD - Enter the root password for your MySQL database.
+
   Example: rootpassword123
 * MYSQLDB_USER Specify - the username for connecting to the database.
+
   Example: db_user
 * DB_URL_ADDRESS - Provide the URL or IP address of the database server.
+
   Example: jdbc:mysql://localhost:3306/book_store
 * MYSQLDB_LOCAL_PORT Specify the port on your local machine for MySQL.
+
   Example: 3306
 * MYSQLDB_DOCKER_PORT - Specify the port inside the Docker container for MySQL.
+
   Example: 3306
 * SPRING_LOCAL_PORT - Set the local port where your Spring Boot application will run.
+
   Example: 8080
 * SPRING_DOCKER_PORT - Set the Docker container port for your Spring Boot application.
+
   Example: 8080
 * DEBUG_PORT - Specify the port for debugging purposes.
+
   Example: 5050
 
 3. Launch docker-compose
