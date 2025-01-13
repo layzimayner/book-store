@@ -8,6 +8,7 @@ import com.example.demo.model.OrderItem;
 import com.example.demo.model.ShoppingCart;
 import com.example.demo.model.User;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.mapstruct.Mapper;
@@ -17,6 +18,7 @@ import org.mapstruct.Mapping;
 public interface OrderMapper {
     @Mapping(target = "orderId", source = "id")
     @Mapping(target = "userId", source = "user.id")
+    @Mapping(target = "orderItems", expression = "java(mapOrderItemsToDto(order.getOrderItems()))")
     OrderDto toDto(Order order);
 
     @Mapping(target = "id", ignore = true)
@@ -52,9 +54,9 @@ public interface OrderMapper {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    default Set<OrderItemDto> mapOrderItemsToDto(Set<OrderItem> orderItems) {
+    default List<OrderItemDto> mapOrderItemsToDto(Set<OrderItem> orderItems) {
         return orderItems.stream()
                 .map(this::toOrderItemDto)
-                .collect(Collectors.toSet());
+                .toList();
     }
 }

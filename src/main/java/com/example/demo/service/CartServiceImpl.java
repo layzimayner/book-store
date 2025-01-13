@@ -1,10 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.cart.CartDto;
-import com.example.demo.dto.item.CartItemResponseDto;
+import com.example.demo.dto.item.CartItemDto;
 import com.example.demo.dto.item.CreateCartItemRequestDto;
 import com.example.demo.dto.item.UpdateCartItemRequestDto;
-import com.example.demo.dto.item.UpdatedQuantityDto;
 import com.example.demo.exception.EntityNotFoundException;
 import com.example.demo.mapper.CartMapper;
 import com.example.demo.model.Book;
@@ -41,7 +40,7 @@ public class CartServiceImpl implements CartService {
 
     @Transactional
     @Override
-    public CartItemResponseDto addItemToCart(CreateCartItemRequestDto requestDto, User user) {
+    public CartItemDto addItemToCart(CreateCartItemRequestDto requestDto, User user) {
         ShoppingCart shoppingCart = cartRepository.getCartByUserId(user.getId())
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Shopping cart not found for user ID: " + user.getId()));
@@ -66,12 +65,12 @@ public class CartServiceImpl implements CartService {
         }
 
         cartRepository.save(shoppingCart);
-        return cartMapper.toCartItemResponseDto(cartItem);
+        return cartMapper.toCartItemDto(cartItem);
     }
 
     @Transactional
     @Override
-    public UpdatedQuantityDto updateItemQuantity(Long id,
+    public CartItemDto updateItemQuantity(Long id,
                                                  UpdateCartItemRequestDto requestDto, User user) {
         ShoppingCart shoppingCart = cartRepository.getCartByUserId(user.getId())
                 .orElseThrow(() -> new EntityNotFoundException(
@@ -83,7 +82,7 @@ public class CartServiceImpl implements CartService {
 
         cartItem.setQuantity(requestDto.getQuantity());
         cartItemRepository.save(cartItem);
-        return cartMapper.toUpdatedDto(cartItem);
+        return cartMapper.toCartItemDto(cartItem);
     }
 
     @Transactional
