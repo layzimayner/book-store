@@ -6,7 +6,7 @@
 3. [How to Run](#how-to-run)
 4. [Key Features](#key-features)
 5. [Technology used](#technology-used)
-6. [Postmen and Swagger](#postman-and_swagger)
+6. [Postman and Swagger](#postman-and_swagger)
 7. [Database Schema and Relationships](#database-schema-and-relationships)
 8. [Docker setup](#docker-setup)
 
