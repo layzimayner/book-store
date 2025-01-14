@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.OrderItem;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,4 +15,7 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
     Optional<OrderItem> findByIdAndOrderIdAndUserId(@Param("orderItemId") Long orderItemId,
                                                     @Param("orderId") Long orderId,
                                                     @Param("userId") Long userId);
+
+    @Query("SELECT i FROM OrderItem i WHERE i.order.id IN :orderIds")
+    List<OrderItem> findItemsByOrderIds(@Param("orderIds") List<Long> orderIds);
 }

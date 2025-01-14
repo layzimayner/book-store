@@ -1,7 +1,6 @@
 package com.example.demo.dto.user;
 
 import com.example.demo.annotation.matcher.FieldMatch;
-import com.example.demo.annotation.unique.Unique;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -13,7 +12,6 @@ import lombok.Data;
         message = "Passwords must match")
 public class UserRegistrationRequestDto {
     @NotBlank
-    @Unique
     @Email
     private String email;
     @NotBlank

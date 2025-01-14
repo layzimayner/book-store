@@ -72,7 +72,7 @@ public class CategoryControllerTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/books/insert-books-and-categories.sql"));
+                    new ClassPathResource("database/scripts/insert-books-and-categories.sql"));
         }
     }
 
@@ -87,7 +87,7 @@ public class CategoryControllerTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/books/cleanup-db.sql")
+                    new ClassPathResource("database/scripts/cleanup-db.sql")
             );
         }
     }
@@ -122,7 +122,7 @@ public class CategoryControllerTest {
 
     @WithMockUser(username = "admin", authorities = {"ADMIN"})
     @Test
-    @Sql(scripts = "classpath:database/books/add-category.sql",
+    @Sql(scripts = "classpath:database/scripts/add-category.sql",
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @DisplayName("Check updateCategory endpoint by valid request")
     void updateCategory_ValidRequest_ReturnCategoryDto() throws Exception {
@@ -153,7 +153,7 @@ public class CategoryControllerTest {
     @WithMockUser(username = "admin", authorities = {"ADMIN"})
     @Test
     @DisplayName("Check deleteCategory endpoint by valid request")
-    @Sql(scripts = "classpath:database/books/add-category.sql",
+    @Sql(scripts = "classpath:database/scripts/add-category.sql",
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     void deleteCategory_ValidRequest_NoContentStatus() throws Exception {
         mockMvc.perform(delete("/categories/{id}", NEW_TEST_CATEGORY_ID)
@@ -165,7 +165,7 @@ public class CategoryControllerTest {
 
     @WithMockUser(username = "user", authorities = {"USER"})
     @Test
-    @Sql(scripts = "classpath:database/books/add-category.sql",
+    @Sql(scripts = "classpath:database/scripts/add-category.sql",
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @DisplayName("Check getCategoryById endpoint")
     void getCategoryById_ValidId_ReturnCategoryDto() throws Exception {

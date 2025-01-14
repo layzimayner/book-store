@@ -89,7 +89,7 @@ public class BookControllerTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/books/insert-books-and-categories.sql"));
+                    new ClassPathResource("database/scripts/insert-books-and-categories.sql"));
         }
     }
 
@@ -104,7 +104,7 @@ public class BookControllerTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/books/cleanup-db.sql")
+                    new ClassPathResource("database/scripts/cleanup-db.sql")
             );
         }
     }
@@ -160,7 +160,7 @@ public class BookControllerTest {
 
     @WithMockUser(username = "user", authorities = {"ADMIN"})
     @Test
-    @Sql(scripts = "classpath:database/books/add-book.sql",
+    @Sql(scripts = "classpath:database/scripts/add-book.sql",
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @DisplayName("Check functionality of deleteBook method")
     void deleteBook_ValidData_ReturnNoContentStatus() throws Exception {
@@ -173,7 +173,7 @@ public class BookControllerTest {
 
     @WithMockUser(username = "user", authorities = {"ADMIN"})
     @Test
-    @Sql(scripts = "classpath:database/books/add-book.sql",
+    @Sql(scripts = "classpath:database/scripts/add-book.sql",
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @DisplayName("Check functionality of updateBook method")
     void update_ValidData_ReturnBookDto() throws Exception {
@@ -208,7 +208,7 @@ public class BookControllerTest {
     @WithMockUser(username = "user", authorities = {"USER"})
     @Test
     @DisplayName("Check functionality of findBookById method")
-    @Sql(scripts = "classpath:database/books/add-book.sql",
+    @Sql(scripts = "classpath:database/scripts/add-book.sql",
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     void findBookById_ValidId_ReturnBookDto() throws Exception {
         BookDto expect = createDefaultBookDto();

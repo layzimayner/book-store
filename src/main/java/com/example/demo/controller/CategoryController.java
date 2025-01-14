@@ -73,6 +73,8 @@ public class CategoryController {
     }
 
     @GetMapping("/{categoryId}/books")
+    @Operation(summary = "Get a list of books by category",
+            description = "Returns a list of books that have the corresponding category ID")
     public List<BookDtoWithoutCategoryIds> getBooksByCategoryId(
             @PathVariable @Positive Long categoryId) {
         return bookService.getBooksByCategoryId(categoryId);
